@@ -305,6 +305,17 @@ USE WAREHOUSE demo_build_wh;
 -- )
 -- FROM @{{env}}_tasty_bytes.public.s3load/raw_pos/country/;
 
+-- Complete table build
+CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.country
+(
+    country_id NUMBER(18,0),
+    country VARCHAR(16777216),
+    iso_currency VARCHAR(3),
+    iso_country VARCHAR(2),
+    city VARCHAR(16777216),
+    city_population VARCHAR(16777216),
+    city_id NUMBER(19,0)
+);
 
 -- franchise table load
 COPY INTO {{env}}_tasty_bytes.raw_pos.franchise
@@ -339,3 +350,7 @@ FROM @{{env}}_tasty_bytes.public.s3load/raw_pos/subset_order_header/;
 -- order_detail table load
 COPY INTO {{env}}_tasty_bytes.raw_pos.order_detail
 FROM @{{env}}_tasty_bytes.public.s3load/raw_pos/subset_order_detail/;
+
+-- country table load
+COPY INTO {{env}}_tasty_bytes.raw_pos.country
+FROM @{{env}}_tasty_bytes.public.s3load/raw_pos/country/;
